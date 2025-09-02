@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: myargo
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/lucasrossi90/argocd
+    targetRevision: HEAD
+    path: kubernetes
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
